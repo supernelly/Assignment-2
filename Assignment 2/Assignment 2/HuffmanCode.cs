@@ -84,38 +84,39 @@ namespace Assignment2
         // Build a Huffman tree based on the character frequencies greater than 0 (invoked by Huffman)
         private void Build(int[] F)
         {
-            //PriorityQueue<Node> PQ;
-            Node p = new Node(null, 0, null, null);
-            int MsgTotal;
-            int t = 0;
-            string[] alphabet = { " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-            
-        
+            PriorityQueue<Node> PQ;
+            int MsgTotal = 0;
+            char[] alphabet = { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+
             for (int i = 0; i < F.Length; i++)
             {
-                if(F[i] > 0)
+                if (F[i] > 0)
                     MsgTotal++;
             }
-            positions[MsgTotal];
+
+            PQ = new PriorityQueue<Node>(MsgTotal);
+
             for (int i = 0; i < F.Length; i++)
             {
-                if(F[i] > 0)
-                    positions.add(i);
+                if (F[i] > 0)
+                    PQ.Add(new Node(alphabet[i], F[i], null, null));
+
             }
-            Node[] BH;
-            BH[MsgTotal * 2];
-            BH[0] = null;
-            for (int i = BH.Length; i > 0; i--)
-            {
-                BH[i] = Node(alphabet[positions[t]], F[positions[t]], null, null);
-                t++;
-            }
+
+            HT = PQ.Front();
         }
 
         // Create the code of 0s and 1s for each character by traversing the Huffman tree (invoked by Huffman)
         private void CreateCodes()
         {
-        
+            
+
+
+
+
+
+
+
         }
 
         // Encode the given text and return a string of 0s and 1s

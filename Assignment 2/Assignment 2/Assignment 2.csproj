@@ -34,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Huffman.cs" />
+    <Compile Include="PriorityQueue.cs" />
+    <Compile Include="HuffmanCode.cs" />
     <Compile Include="Main.cs" />
   </ItemGroup>
   <ItemGroup>
