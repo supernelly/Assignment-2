@@ -15,7 +15,8 @@ namespace Assignment2
         public static void Main()
         {
             // Test code here
-            Huffman S = new Huffman(" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+            //Huffman S = new Huffman(" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+            Huffman S = new Huffman("Pippin");
             Console.ReadKey();
 
         }
