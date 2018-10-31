@@ -107,16 +107,18 @@ namespace Assignment2
         }
 
         // Create the code of 0s and 1s for each character by traversing the Huffman tree (invoked by Huffman)
-        private void CreateCodes()
+        private void CreateCodes(Node root)
         {
-            
-
-
-
-
-
-
-
+            if (root.Left != null)
+            {
+                CreateCodes(root.Left);
+                D.Add(root.Character, "0");
+            }
+            if (root.Right != null)
+            {
+                CreateCodes(root.Right);
+                D.Add(root.Character, "1");
+            }
         }
 
         // Encode the given text and return a string of 0s and 1s
