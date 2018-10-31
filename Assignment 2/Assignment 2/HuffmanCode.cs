@@ -47,7 +47,7 @@ namespace Assignment2
             {
                 Console.WriteLine(charFreq[i]);
             }
-
+            Build(charFreq);
 
         }
 
@@ -86,6 +86,8 @@ namespace Assignment2
         {
             PriorityQueue<Node> PQ;
             int MsgTotal = 0;
+            
+            
             char[] alphabet = { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
             for (int i = 0; i < F.Length; i++)
@@ -93,17 +95,20 @@ namespace Assignment2
                 if (F[i] > 0)
                     MsgTotal++;
             }
-
-            PQ = new PriorityQueue<Node>(MsgTotal);
+            int t = MsgTotal;
+            Node[] Nodes = new Node[MsgTotal * 2];
+            PQ = new PriorityQueue<Node>(MsgTotal * 2);
 
             for (int i = 0; i < F.Length; i++)
             {
                 if (F[i] > 0)
-                    PQ.Add(new Node(alphabet[i], F[i], null, null));
+                    Nodes[t] = (new Node(alphabet[i], F[i], null, null));
 
             }
 
+            PQ.HeapSort(Nodes);
             HT = PQ.Front();
+            
         }
 
         // Create the code of 0s and 1s for each character by traversing the Huffman tree (invoked by Huffman)
