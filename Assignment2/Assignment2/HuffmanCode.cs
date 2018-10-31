@@ -69,17 +69,17 @@ namespace Assignment2
                 int charNum = S[i];
 
                 if (charNum >= 65 && charNum <= 90)
-                    charNum = charNum - 64; // need to check
+                    charNum = charNum - 64;
                 else if (charNum >= 97 && charNum <= 122)
-                    charNum = charNum - 70; // need to check
+                    charNum = charNum - 70;
                 else
                     charNum = 0;
-
+         
                 charFreq[charNum]++;
             }
             return charFreq;
         }
-        /*
+        
         // 20 marks
         // Build a Huffman tree based on the character frequencies greater than 0 (invoked by Huffman)
         private void Build(int[] F)
@@ -87,7 +87,7 @@ namespace Assignment2
             PriorityQueue<Node> PQ;
             …
         }
-        // 20 marks
+        /*// 20 marks
         // Create the code of 0s and 1s for each character by traversing the Huffman tree (invoked by Huffman)
         private void CreateCodes()
         { … }
