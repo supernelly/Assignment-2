@@ -218,43 +218,44 @@ namespace Assignment2
             return name + " with priority " + priorityValue;
         }
     }
-}
+
     //-----------------------------------------------------------------------------
 
     // Test for above classes
+    /*
+    public class Test
+    {
+        public static void Main(string[] args)
+        {
+            int i;
 
-//    public class Test
-//    {
-//        public static void Main(string[] args)
-//        {
-//            int i;
+            PriorityQueue<PriorityClass> PQ = new PriorityQueue<PriorityClass>(10);
+            PriorityClass[] A = new PriorityClass[5];
 
-//            PriorityQueue<PriorityClass> PQ = new PriorityQueue<PriorityClass>(10);
-//            PriorityClass[] A = new PriorityClass[5];
+            A[0] = new PriorityClass(1, "Susan");
+            A[1] = new PriorityClass(3, "Hannah");
+            A[2] = new PriorityClass(3, "Tony");
+            A[3] = new PriorityClass(7, "Pranjal");
+            A[4] = new PriorityClass(1, "Alan");
 
-//            A[0] = new PriorityClass(1, "Susan");
-//            A[1] = new PriorityClass(3, "Hannah");
-//            A[2] = new PriorityClass(3, "Tony");
-//            A[3] = new PriorityClass(7, "Pranjal");
-//            A[4] = new PriorityClass(1, "Alan");
+            PQ.Add(new PriorityClass(6, "Brian"));
+            PQ.Add(new PriorityClass(6, "Richard"));
+            PQ.Add(new PriorityClass(4, "Sabine"));
+            PQ.Add(new PriorityClass(7, "Wenying"));
+            PQ.Add(new PriorityClass(0, "Patrick"));
 
-//            PQ.Add(new PriorityClass(6, "Brian"));
-//            PQ.Add(new PriorityClass(6, "Richard"));
-//            PQ.Add(new PriorityClass(4, "Sabine"));
-//            PQ.Add(new PriorityClass(7, "Wenying"));
-//            PQ.Add(new PriorityClass(0, "Patrick"));
+            while (!PQ.Empty())
+            {
+                Console.WriteLine(PQ.Front().ToString());
+                PQ.Remove();
+            }
+            Console.ReadLine();
 
-//            while (!PQ.Empty())
-//            {
-//                Console.WriteLine(PQ.Front().ToString());
-//                PQ.Remove();
-//            }
-//            Console.ReadLine();
-
-//            PQ.HeapSort(A);
-//            for (i = 0; i < A.Length; i++)
-//                Console.WriteLine(A[i].ToString());
-//            Console.ReadLine();
-//        }
-//    }
-//}
+            PQ.HeapSort(A);
+            for (i = 0; i < A.Length; i++)
+                Console.WriteLine(A[i].ToString());
+            Console.ReadLine();
+        }
+    }
+    */
+}

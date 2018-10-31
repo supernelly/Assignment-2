@@ -16,7 +16,12 @@ namespace Assignment2
         {
             // Test code here
             //Huffman S = new Huffman(" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-            Huffman S = new Huffman("Pippin");
+            Huffman a = new Huffman("abc");
+            //Huffman b = new Huffman("Pipppiin");
+            //Huffman c = new Huffman("Pippppiin");
+            //Huffman d = new Huffman("Pipppppiin");
+            Console.WriteLine(a.Encode("abc"));
+
             Console.ReadKey();
 
         }

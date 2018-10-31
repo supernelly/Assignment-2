@@ -33,21 +33,28 @@ namespace Assignment2
                 return 1;
         }
     }
+
     class Huffman
     {
         private Node HT; // Huffman tree to create codes and decode text
-        private Dictionary<char, string> D; // Dictionary to encode text
+        private Dictionary<char, string> D = new Dictionary<char, string>(); // Dictionary to encode text
 
         // Constructor
         public Huffman(string S)
         {
             // Test code
+            
             int[] charFreq = AnalyzeText(S);
-            for (int i = 0; i < charFreq.Length; i++)
-            {
-                Console.WriteLine(charFreq[i]);
-            }
+
+            
+            //for (int i = 0; i < charFreq.Length; i++)
+            //{
+                //Console.WriteLine(charFreq[i]);
+            //}
+            
+
             Build(charFreq);
+            CreateCodes(HT, "");
 
         }
 
@@ -63,19 +70,13 @@ namespace Assignment2
 
             // charFreq[0] = ' ', charFreq[1-26] = 'A'->'Z', charFreq[27-53] = 'a'->'z'
 
-            int[] charFreq = new int[53];
+            int[] charFreq = new int[123];
             for (int i = 0; i < S.Length; i++)
             {
                 int charNum = S[i];
 
-                if (charNum >= 65 && charNum <= 90)
-                    charNum = charNum - 64;
-                else if (charNum >= 97 && charNum <= 122)
-                    charNum = charNum - 70;
-                else
-                    charNum = 0;
-         
-                charFreq[charNum]++;
+                if (charNum >= 65 && charNum <= 90 || charNum >= 97 && charNum <= 122 || charNum == 32)
+                    charFreq[charNum]++;
             }
             return charFreq;
         }
@@ -84,53 +85,72 @@ namespace Assignment2
         // Build a Huffman tree based on the character frequencies greater than 0 (invoked by Huffman)
         private void Build(int[] F)
         {
-            PriorityQueue<Node> PQ;
-            int MsgTotal = 0;
-            
-            
-            char[] alphabet = { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+            int position = 0, charNum = 0;
 
-            for (int i = 0; i < F.Length; i++)
+            foreach (int f in F)
             {
-                if (F[i] > 0)
-                    MsgTotal++;
-            }
-            int t = MsgTotal;
-            Node[] Nodes = new Node[MsgTotal * 2];
-            PQ = new PriorityQueue<Node>(MsgTotal * 2);
-
-            for (int i = 0; i < F.Length; i++)
-            {
-                if (F[i] > 0)
-                    Nodes[t] = (new Node(alphabet[i], F[i], null, null));
-
+                if (f > 0) // Number of frequencies that are not 0
+                    charNum++;
             }
 
-            PQ.HeapSort(Nodes);
-            HT = PQ.Front();
-            
+            PriorityQueue<Node> PQ = new PriorityQueue<Node>(charNum);
+
+            foreach (int f in F) // Adds frequency of position number to PQ
+            {
+                if (f > 0)
+                    PQ.Add(new Node((char)position, f, null, null));
+                position++;
+            }
+
+            while (PQ.Size() > 1) // Creates binary heap when PQ.Size is 1
+            {
+                Node temp = PQ.Front(); // Holds front
+                PQ.Remove();
+                Node replaced = new Node('.', temp.Frequency + PQ.Front().Frequency, temp, PQ.Front()); // creates parent node
+                PQ.Remove();
+                PQ.Add(replaced);
+                Console.WriteLine(replaced.Frequency); // prints parent node's frequency
+                if (PQ.Size() == 1)
+                    HT = replaced;
+            }
+
+            Console.WriteLine("Hello pippin"); // if it makes it to end...
         }
 
         // Create the code of 0s and 1s for each character by traversing the Huffman tree (invoked by Huffman)
-        private void CreateCodes(Node root)
+        private void CreateCodes(Node current, string number)
         {
-            if (root.Left != null)
+            if (current.Left != null)
             {
-                CreateCodes(root.Left);
-                D.Add(root.Character, "0");
+                CreateCodes(current.Left, number += "0");
+                CreateCodes(current.Right, number += "1");
             }
-            if (root.Right != null)
+            else
             {
-                CreateCodes(root.Right);
-                D.Add(root.Character, "1");
+                D.Add(current.Character, number); // Add number once child if null
+                Console.WriteLine(current.Character);
+                return;
             }
         }
 
         // Encode the given text and return a string of 0s and 1s
-        //public string Encode(string S)
-        //{
-           
-        //}
+        public string Encode(string S)
+        {
+            string code = "";
+
+            foreach (char c in S)
+            {
+                try // removed once perfected
+                {
+                    code += (D[c] + " ");
+                }
+                catch
+                {
+                    code += "nokey ";
+                }
+            }
+            return code;
+        }
 
         //// Decode the ggiven string of 0s and 1s and return the original text
         //public string Decode(string S)
@@ -145,3 +165,7 @@ namespace Assignment2
     // Testing
     // 10 marks
 }
+
+
+
+
