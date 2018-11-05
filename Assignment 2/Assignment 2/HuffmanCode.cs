@@ -25,7 +25,7 @@ namespace Assignment2
             Node n = obj as Node;
             if (n == null)
                 return 1;
-            else if (Frequency < n.Frequency)
+            else if (Frequency > n.Frequency)
                 return -1;
             else if (Frequency == n.Frequency)
                 return 0;
@@ -37,7 +37,7 @@ namespace Assignment2
     class Huffman
     {
         private Node HT; // Huffman tree to create codes and decode text
-        private Dictionary<char, string> D = new Dictionary<char, string>(); // Dictionary to encode text
+        private Dictionary<char, string> D; // Dictionary to encode text
 
         // Constructor
         public Huffman(string S)
@@ -46,15 +46,18 @@ namespace Assignment2
             
             int[] charFreq = AnalyzeText(S);
 
-            
+
             //for (int i = 0; i < charFreq.Length; i++)
             //{
-                //Console.WriteLine(charFreq[i]);
+            //Console.WriteLine(charFreq[i]);
             //}
-            
 
+            D = new Dictionary<char, string>();
             Build(charFreq);
-            CreateCodes(HT, "");
+            if (HT.Left == null)
+                D.Add(HT.Character, "0");
+            else
+                CreateCodes(HT, "");
 
         }
 
@@ -112,22 +115,22 @@ namespace Assignment2
                 if (PQ.Size() == 1)
                     HT = replaced;
             }
-
+            PQ.MakeEmpty();
             Console.WriteLine("Hello pippin"); // if it makes it to end...
         }
-
+        
         // Create the code of 0s and 1s for each character by traversing the Huffman tree (invoked by Huffman)
         private void CreateCodes(Node current, string number)
         {
+            string left = number, right = number;
             if (current.Left != null)
             {
-                CreateCodes(current.Left, number += "0");
-                CreateCodes(current.Right, number += "1");
+                CreateCodes(current.Left, left += "0");
+                CreateCodes(current.Right, right += "1");
             }
             else
             {
                 D.Add(current.Character, number); // Add number once child if null
-                Console.WriteLine(current.Character);
                 return;
             }
         }
@@ -154,24 +157,29 @@ namespace Assignment2
        public string Decode(string S)
         {
             string codeCurr = "", decode = "";
-            foreach (char c in S)
-            {
-                if (c == ' ') // space indicates when character's code is finished
+            if (HT == null)
+                return "";
+            else if (HT.Left == null)
+                decode += Convert.ToString(HT.Character);
+            else
+                foreach (char c in S)
                 {
-                    Traverse(HT, codeCurr);
+                    if (c == ' ') // space indicates when character's code is finished
+                    {
+                        Traverse(HT, codeCurr);
 
-                    Console.WriteLine(codeCurr);
-                    codeCurr = "";
+                        Console.WriteLine(codeCurr);
+                        codeCurr = "";
+                    }
+                    else
+                        codeCurr += Convert.ToString(c);
                 }
-                else
-                    codeCurr += Convert.ToString(c);
-            }
 
             void Traverse(Node current, string number)
             {
-                if (current.Left == null || number == "")
+                if (number == "")
                     decode += Convert.ToString(current.Character);
-                else if (number.Substring(0) == "0")
+                else if (number.Substring(0, 1) == "0")
                     Traverse(current.Left, number.Substring(1, number.Length - 1));
                 else
                     Traverse(current.Right, number.Substring(1, number.Length - 1));

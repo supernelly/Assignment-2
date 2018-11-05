@@ -20,8 +20,8 @@ namespace Assignment2
             //Huffman b = new Huffman("Pipppiin");
             //Huffman c = new Huffman("Pippppiin");
             //Huffman d = new Huffman("Pipppppiin");
-            Console.WriteLine(a.Encode("aaabbbbccd"));
-            Console.WriteLine(a.Decode("0001 0001 0001 000 000 000 000 001 001 01"));
+            Console.WriteLine(a.Encode("aaabbbbccddd"));
+            Console.WriteLine(a.Decode("10 10 10 0 0 0 0 111 111 110 110 110 "));
             Console.ReadKey();
 
         }
