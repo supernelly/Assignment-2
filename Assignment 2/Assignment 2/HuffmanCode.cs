@@ -68,8 +68,6 @@ namespace Assignment2
             // (int)'z' = 122
             // (int)' ' = 32
 
-            // charFreq[0] = ' ', charFreq[1-26] = 'A'->'Z', charFreq[27-53] = 'a'->'z'
-
             int[] charFreq = new int[123];
             for (int i = 0; i < S.Length; i++)
             {
@@ -94,7 +92,6 @@ namespace Assignment2
             }
 
             PriorityQueue<Node> PQ = new PriorityQueue<Node>(charNum);
-
             foreach (int f in F) // Adds frequency of position number to PQ
             {
                 if (f > 0)
@@ -109,7 +106,9 @@ namespace Assignment2
                 Node replaced = new Node('.', temp.Frequency + PQ.Front().Frequency, temp, PQ.Front()); // creates parent node
                 PQ.Remove();
                 PQ.Add(replaced);
+
                 Console.WriteLine(replaced.Frequency); // prints parent node's frequency
+
                 if (PQ.Size() == 1)
                     HT = replaced;
             }
@@ -136,28 +135,50 @@ namespace Assignment2
         // Encode the given text and return a string of 0s and 1s
         public string Encode(string S)
         {
-            string code = "";
-
+            string encode = "";
             foreach (char c in S)
             {
                 try // removed once perfected
                 {
-                    code += (D[c] + " ");
+                    encode += (D[c] + " ");
                 }
                 catch
                 {
-                    code += "nokey ";
+                    encode += "nokey ";
                 }
             }
-            return code;
+            return encode;
         }
 
-        //// Decode the ggiven string of 0s and 1s and return the original text
-        //public string Decode(string S)
-        //{
-        
-        
-        //} 
+        // Decode the given string of 0s and 1s and return the original text
+       public string Decode(string S)
+        {
+            string codeCurr = "", decode = "";
+            foreach (char c in S)
+            {
+                if (c == ' ') // space indicates when character's code is finished
+                {
+                    Traverse(HT, codeCurr);
+
+                    Console.WriteLine(codeCurr);
+                    codeCurr = "";
+                }
+                else
+                    codeCurr += Convert.ToString(c);
+            }
+
+            void Traverse(Node current, string number)
+            {
+                if (current.Left == null || number == "")
+                    decode += Convert.ToString(current.Character);
+                else if (number.Substring(0) == "0")
+                    Traverse(current.Left, number.Substring(1, number.Length - 1));
+                else
+                    Traverse(current.Right, number.Substring(1, number.Length - 1));
+                Console.WriteLine(current.Character); // test
+            }
+            return decode;
+        } 
     }
     // Source documentation (comments)
     // 10 marks

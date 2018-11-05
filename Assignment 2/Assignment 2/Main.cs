@@ -16,12 +16,12 @@ namespace Assignment2
         {
             // Test code here
             //Huffman S = new Huffman(" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-            Huffman a = new Huffman("abc");
+            Huffman a = new Huffman("aaabbbbccd");
             //Huffman b = new Huffman("Pipppiin");
             //Huffman c = new Huffman("Pippppiin");
             //Huffman d = new Huffman("Pipppppiin");
-            Console.WriteLine(a.Encode("abc"));
-
+            Console.WriteLine(a.Encode("aaabbbbccd"));
+            Console.WriteLine(a.Decode("0001 0001 0001 000 000 000 000 001 001 01"));
             Console.ReadKey();
 
         }
