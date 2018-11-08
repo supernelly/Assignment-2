@@ -43,7 +43,7 @@ namespace Assignment2
         public Huffman(string S)
         {
             // Test code
-            
+
             int[] charFreq = AnalyzeText(S);
 
 
@@ -81,7 +81,7 @@ namespace Assignment2
             }
             return charFreq;
         }
-        
+
         // 20 marks
         // Build a Huffman tree based on the character frequencies greater than 0 (invoked by Huffman)
         private void Build(int[] F)
@@ -118,7 +118,7 @@ namespace Assignment2
             PQ.MakeEmpty();
             Console.WriteLine("Hello pippin"); // if it makes it to end...
         }
-        
+
         // Create the code of 0s and 1s for each character by traversing the Huffman tree (invoked by Huffman)
         private void CreateCodes(Node current, string number)
         {
@@ -154,7 +154,7 @@ namespace Assignment2
         }
 
         // Decode the given string of 0s and 1s and return the original text
-       public string Decode(string S)
+        public string Decode(string S)
         {
             string codeCurr = "", decode = "";
             if (HT == null)
@@ -186,7 +186,7 @@ namespace Assignment2
                 Console.WriteLine(current.Character); // test
             }
             return decode;
-        } 
+        }
     }
     // Source documentation (comments)
     // 10 marks
