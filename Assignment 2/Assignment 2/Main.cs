@@ -1,7 +1,7 @@
 ﻿/*
  *  Assignment 2 - Huffman Codes
  *
- *  Written By: Nelson Su (0616242) - November 2018
+ *  Written By: Nelson Su (0616242) and Conrad Schoenhofer (0657149) - November 2018
  *
  *  Description here
  *  
