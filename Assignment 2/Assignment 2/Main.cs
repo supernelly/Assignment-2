@@ -3,7 +3,7 @@
  *
  *  Written By: Nelson Su (0616242) and Conrad Schoenhofer (0625149) - November 2018
  *
- *  Description here
+ *  Huffman code implementation
  *  
  */
 using System;
@@ -14,14 +14,31 @@ namespace Assignment2
     {
         public static void Main()
         {
-            // Test code here
-            //Huffman S = new Huffman(" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-            Huffman a = new Huffman("aaabbbbccd");
-            //Huffman b = new Huffman("Pipppiin");
-            //Huffman c = new Huffman("Pippppiin");
-            //Huffman d = new Huffman("Pipppppiin");
-            Console.WriteLine(a.Encode("aaabbbbccddd"));
-            Console.WriteLine(a.Decode("10 10 10 0 0 0 0 111 111 110 110 110 "));
+            string s1 = "PiP pIn", s2 = "qwerty", s3 = "QWERTY", s4 = " Hello ";
+
+            Huffman a = new Huffman(s1);
+            Console.WriteLine("String: " + s1);
+            Console.WriteLine("Encode: " + a.Encode(s1));
+            Console.WriteLine("Decode: " + a.Decode(a.Encode(s1)));
+            Console.WriteLine();
+
+            Huffman b = new Huffman(s2);
+            Console.WriteLine("String: " + s2);
+            Console.WriteLine("Encode: " + b.Encode(s2));
+            Console.WriteLine("Decode: " + b.Decode(b.Encode(s2)));
+            Console.WriteLine();
+
+            Huffman c = new Huffman(s3);
+            Console.WriteLine("String: " + s3);
+            Console.WriteLine("Encode: " + c.Encode(s3));
+            Console.WriteLine("Decode: " + c.Decode(c.Encode(s3)));
+            Console.WriteLine();
+
+            Huffman d = new Huffman(s4);
+            Console.WriteLine("String: " + s4);
+            Console.WriteLine("Encode: " + d.Encode(s4));
+            Console.WriteLine("Decode: " + d.Decode(d.Encode(s4)));
+
             Console.ReadKey();
 
         }

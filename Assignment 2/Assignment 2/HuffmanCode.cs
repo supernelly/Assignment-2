@@ -19,7 +19,7 @@ namespace Assignment2
             Left = left;
             Right = right;
         }
-        // 5 marks
+
         public int CompareTo(Object obj)
         {
             Node n = obj as Node;
@@ -42,15 +42,7 @@ namespace Assignment2
         // Constructor
         public Huffman(string S)
         {
-            // Test code
-
             int[] charFreq = AnalyzeText(S);
-
-
-            //for (int i = 0; i < charFreq.Length; i++)
-            //{
-            //Console.WriteLine(charFreq[i]);
-            //}
 
             D = new Dictionary<char, string>();
             Build(charFreq);
@@ -61,28 +53,20 @@ namespace Assignment2
 
         }
 
-        // 15 marks
         // Return the frequency of each character in the given text (invoked by Huffman)
         private int[] AnalyzeText(string S)
         {
-            // (int)'A' = 65
-            // (int)'Z' = 90
-            // (int)'a' = 97
-            // (int)'z' = 122
-            // (int)' ' = 32
-
             int[] charFreq = new int[123];
             for (int i = 0; i < S.Length; i++)
             {
                 int charNum = S[i];
 
                 if (charNum >= 65 && charNum <= 90 || charNum >= 97 && charNum <= 122 || charNum == 32)
-                    charFreq[charNum]++;
+                    charFreq[charNum]++; // Add frequency if it comes across a letter or space
             }
             return charFreq;
         }
 
-        // 20 marks
         // Build a Huffman tree based on the character frequencies greater than 0 (invoked by Huffman)
         private void Build(int[] F)
         {
@@ -106,17 +90,14 @@ namespace Assignment2
             {
                 Node temp = PQ.Front(); // Holds front
                 PQ.Remove();
-                Node replaced = new Node('.', temp.Frequency + PQ.Front().Frequency, temp, PQ.Front()); // creates parent node
+                Node replaced = new Node('.', temp.Frequency + PQ.Front().Frequency, temp, PQ.Front()); // Creates parent node
                 PQ.Remove();
                 PQ.Add(replaced);
-
-                Console.WriteLine(replaced.Frequency); // prints parent node's frequency
 
                 if (PQ.Size() == 1)
                     HT = replaced;
             }
             PQ.MakeEmpty();
-            Console.WriteLine("Hello pippin"); // if it makes it to end...
         }
 
         // Create the code of 0s and 1s for each character by traversing the Huffman tree (invoked by Huffman)
@@ -141,14 +122,7 @@ namespace Assignment2
             string encode = "";
             foreach (char c in S)
             {
-                try // removed once perfected
-                {
-                    encode += (D[c] + " ");
-                }
-                catch
-                {
-                    encode += "nokey ";
-                }
+                encode += (D[c] + " ");
             }
             return encode;
         }
@@ -168,14 +142,13 @@ namespace Assignment2
                     {
                         Traverse(HT, codeCurr);
 
-                        Console.WriteLine(codeCurr);
                         codeCurr = "";
                     }
                     else
                         codeCurr += Convert.ToString(c);
                 }
 
-            void Traverse(Node current, string number)
+            void Traverse(Node current, string number) // Recursive function to traverse huffman tree
             {
                 if (number == "")
                     decode += Convert.ToString(current.Character);
@@ -183,16 +156,10 @@ namespace Assignment2
                     Traverse(current.Left, number.Substring(1, number.Length - 1));
                 else
                     Traverse(current.Right, number.Substring(1, number.Length - 1));
-                Console.WriteLine(current.Character); // test
             }
             return decode;
         }
     }
-    // Source documentation (comments)
-    // 10 marks
-
-    // Testing
-    // 10 marks
 }
 
 
